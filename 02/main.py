@@ -1,6 +1,9 @@
-from input import INPUT
+DAY = 2
 
-array = [v.split() for v in INPUT.splitlines()]
+with open(f"{DAY:02}/input.txt") as f:
+    CONTENT = [a.strip() for a in f.readlines()]
+
+array = [v.split() for v in CONTENT]
 
 horiz = 0
 depth = 0

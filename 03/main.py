@@ -1,4 +1,6 @@
-with open('03/input.txt') as f:
+DAY = 3
+
+with open(f"{DAY:02}/input.txt") as f:
     CONTENT = [a.strip() for a in f.readlines()]
 
 

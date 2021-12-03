@@ -1,4 +1,4 @@
-INPUT = """forward 8
+forward 8
 forward 3
 forward 8
 down 6
@@ -997,4 +997,4 @@ forward 4
 forward 2
 up 6
 down 9
-forward 7"""
+forward 7
