@@ -7,12 +7,13 @@ depth = 0
 
 for k, v in array:
     v = int(v)
-    if k == 'forward':
-        horiz += v
-    elif k == 'up':
-        depth -= v
-    elif k == 'down':
-        depth += v
+    match k:
+        case 'forward':
+            horiz += v
+        case 'up':
+            depth -= v
+        case 'down':
+            depth += v
 
 print(horiz * depth)
 
@@ -22,12 +23,13 @@ aim = 0
 
 for k, v in array:
     v = int(v)
-    if k == 'forward':
-        horiz += v
-        depth += v * aim
-    elif k == 'up':
-        aim -= v
-    elif k == 'down':
-        aim += v
+    match k:
+        case 'forward':
+            horiz += v
+            depth += v * aim
+        case 'up':
+            aim -= v
+        case 'down':
+            aim += v
 
 print(horiz * depth)
