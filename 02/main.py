@@ -1,38 +1,44 @@
 import os
 
 with open(f"{os.path.dirname(__file__)}/input.txt") as f:
-    CONTENT = [a.strip() for a in f.readlines()]
+    INPUT = f.read()
 
-array = [v.split() for v in CONTENT]
+array = [v.split() for v in INPUT.splitlines()]
 
-horiz = 0
-depth = 0
+def part_one():
+    horiz = 0
+    depth = 0
 
-for k, v in array:
-    v = int(v)
-    match k:
-        case 'forward':
-            horiz += v
-        case 'up':
-            depth -= v
-        case 'down':
-            depth += v
+    for k, v in array:
+        v = int(v)
+        match k:
+            case 'forward':
+                horiz += v
+            case 'up':
+                depth -= v
+            case 'down':
+                depth += v
 
-print(horiz * depth)
+    return horiz * depth
 
-horiz = 0
-depth = 0
-aim = 0
+def part_two():
+    horiz = 0
+    depth = 0
+    aim = 0
 
-for k, v in array:
-    v = int(v)
-    match k:
-        case 'forward':
-            horiz += v
-            depth += v * aim
-        case 'up':
-            aim -= v
-        case 'down':
-            aim += v
+    for k, v in array:
+        v = int(v)
+        match k:
+            case 'forward':
+                horiz += v
+                depth += v * aim
+            case 'up':
+                aim -= v
+            case 'down':
+                aim += v
 
-print(horiz * depth)
+    return horiz * depth
+
+if __name__ == '__main__':
+    print(part_one())
+    print(part_two())

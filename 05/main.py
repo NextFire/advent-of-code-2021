@@ -4,10 +4,8 @@ import numpy as np
 with open(f"{os.path.dirname(__file__)}/input.txt") as f:
     INPUT = f.read()
 
-splitted = INPUT.splitlines()
-vents = [
-    [tuple(map(int, ss.split(','))) for ss in s.split(' -> ')] for s in splitted
-]
+lines = INPUT.splitlines()
+vents = [[tuple(map(int, s.split(','))) for s in l.split(' -> ')] for l in lines]
 
 
 def part_one():
