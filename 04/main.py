@@ -7,7 +7,7 @@ with open(f"{os.path.dirname(__file__)}/input.txt") as f:
 
 splitted = INPUT.split('\n\n')
 drawed = [int(v) for v in splitted[0].split(',')]
-boards = [np.loadtxt(io.StringIO(s)) for s in splitted[1:]]
+boards = [np.loadtxt(io.StringIO(s), dtype=int) for s in splitted[1:]]
 
 
 def part_one():
@@ -49,6 +49,6 @@ def part_two():
                     return np.sum(filtered) * d
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(part_one())
     print(part_two())

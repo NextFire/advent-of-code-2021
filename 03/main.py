@@ -41,6 +41,6 @@ def part_two():
     return oxygen * co2
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(part_one())
     print(part_two())
