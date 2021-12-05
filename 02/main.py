@@ -1,6 +1,6 @@
-DAY = 2
+import os
 
-with open(f"{DAY:02}/input.txt") as f:
+with open(f"{os.path.dirname(__file__)}/input.txt") as f:
     CONTENT = [a.strip() for a in f.readlines()]
 
 array = [v.split() for v in CONTENT]
