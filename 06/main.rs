@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
 
@@ -17,27 +16,23 @@ fn part_one(mut fishes: Vec<i32>) {
 }
 
 fn part_two(fishes: Vec<i32>) {
-    let mut fish_map = HashMap::new();
-    for i in 0..=8 {
-        fish_map.insert(i, 0);
-    }
+    let mut fish_array = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     for f in fishes {
-        let v = fish_map.get_mut(&f).unwrap();
-        *v += 1;
+        fish_array[f as usize] += 1;
     }
     for _ in 0..256 {
-        let zero_fishes = fish_map[&0];
-        fish_map.insert(0, fish_map[&1]);
-        fish_map.insert(1, fish_map[&2]);
-        fish_map.insert(2, fish_map[&3]);
-        fish_map.insert(3, fish_map[&4]);
-        fish_map.insert(4, fish_map[&5]);
-        fish_map.insert(5, fish_map[&6]);
-        fish_map.insert(6, fish_map[&7] + zero_fishes);
-        fish_map.insert(7, fish_map[&8]);
-        fish_map.insert(8, zero_fishes);
+        let zero_fishes = fish_array[0];
+        fish_array[0] = fish_array[1];
+        fish_array[1] = fish_array[2];
+        fish_array[2] = fish_array[3];
+        fish_array[3] = fish_array[4];
+        fish_array[4] = fish_array[5];
+        fish_array[5] = fish_array[6];
+        fish_array[6] = fish_array[7] + zero_fishes;
+        fish_array[7] = fish_array[8];
+        fish_array[8] = zero_fishes;
     }
-    println!("After 256 days: {} fishes", fish_map.values().sum::<i64>());
+    println!("After 256 days: {} fishes", fish_array.iter().sum::<i64>());
 }
 
 fn main() {
