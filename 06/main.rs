@@ -16,7 +16,7 @@ fn part_one(mut fishes: Vec<i32>) {
 }
 
 fn part_two(fishes: Vec<i32>) {
-    let mut fish_array = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let mut fish_array = [0; 9];
     for f in fishes {
         fish_array[f as usize] += 1;
     }
