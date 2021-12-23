@@ -1,7 +1,4 @@
 import os
-from collections import defaultdict
-from functools import reduce
-from itertools import chain
 import re
 
 with open(f"{os.path.dirname(__file__)}/input.txt") as f:
