@@ -7,7 +7,7 @@ struct Pair {
 }
 
 impl Pair {
-    fn from_line(line: &str) -> Pair {
+    fn from_line(line: &str) -> Self {
         let parts: Vec<_> = line.split(',').collect();
         let first = range_str_to_range(parts[0]);
         let second = range_str_to_range(parts[1]);
