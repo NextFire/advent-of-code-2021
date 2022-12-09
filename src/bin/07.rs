@@ -74,7 +74,7 @@ fn main() {
     let mut pwd = Vec::new();
 
     input.trim().lines().for_each(|line| {
-        let parts: Vec<_> = line.split(' ').collect();
+        let parts: Vec<_> = line.split_whitespace().collect();
         match parts[..] {
             ["$", "cd", name] => {
                 match name {
