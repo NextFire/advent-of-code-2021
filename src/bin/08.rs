@@ -1,30 +1,6 @@
 use std::fs;
 
-struct Matrix<T> {
-    rows: Vec<Vec<T>>,
-}
-
-impl<T> From<Vec<Vec<T>>> for Matrix<T> {
-    fn from(rows: Vec<Vec<T>>) -> Self {
-        Matrix { rows }
-    }
-}
-
-impl<T> Matrix<T> {
-    fn get(&self, i: usize, j: usize) -> Option<&T> {
-        self.rows.get(i).and_then(|row| row.get(j))
-    }
-
-    fn size(&self) -> (usize, usize) {
-        let nb_row = self.rows.len();
-        let nb_col: usize = self
-            .rows
-            .get(0)
-            .and_then(|col| Some(col.len()))
-            .unwrap_or(0);
-        (nb_row, nb_col)
-    }
-}
+use advent_of_code_2022::Matrix;
 
 fn main() {
     let input = fs::read_to_string("inputs/08.txt").unwrap();
