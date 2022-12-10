@@ -29,7 +29,7 @@ impl From<&str> for Move {
 }
 
 #[allow(dead_code)]
-fn positions_printer(pos: &HashSet<Position>) {
+fn print_positions(pos: &HashSet<Position>) {
     let min_x = pos.iter().map(|p| p.x).min().unwrap();
     let max_x = pos.iter().map(|p| p.x).max().unwrap();
     let min_y = pos.iter().map(|p| p.y).min().unwrap();
@@ -48,7 +48,7 @@ fn positions_printer(pos: &HashSet<Position>) {
     }
 }
 
-fn compute_part1(moves: &Vec<Move>) -> HashSet<Position> {
+fn do_part1(moves: &Vec<Move>) -> HashSet<Position> {
     let mut head_pos = Position { x: 0, y: 0 };
     let mut tail_pos = Position { x: 0, y: 0 };
     let mut tail_pos_set = HashSet::new();
@@ -60,29 +60,18 @@ fn compute_part1(moves: &Vec<Move>) -> HashSet<Position> {
             Move::Up => head_pos.y += 1,
             Move::Down => head_pos.y -= 1,
         }
-        if head_pos.x == tail_pos.x + 2 {
-            tail_pos.x += 1;
-            tail_pos.y = head_pos.y;
-        }
-        if head_pos.x == tail_pos.x - 2 {
-            tail_pos.x -= 1;
-            tail_pos.y = head_pos.y;
-        }
-        if head_pos.y == tail_pos.y + 2 {
-            tail_pos.x = head_pos.x;
-            tail_pos.y += 1;
-        }
-        if head_pos.y == tail_pos.y - 2 {
-            tail_pos.x = head_pos.x;
-            tail_pos.y -= 1;
+        let diff_x = head_pos.x - tail_pos.x;
+        let diff_y = head_pos.y - tail_pos.y;
+        if diff_x.abs() == 2 || diff_y.abs() == 2 {
+            tail_pos.x += diff_x.signum();
+            tail_pos.y += diff_y.signum();
         }
         tail_pos_set.insert(tail_pos);
     }
     tail_pos_set
 }
 
-// FIXME:
-fn compute_part2(moves: &Vec<Move>) -> HashSet<Position> {
+fn do_part2(moves: &Vec<Move>) -> HashSet<Position> {
     let mut knobs = vec![Position { x: 0, y: 0 }; 10];
     let mut tail_pos_set = HashSet::new();
     tail_pos_set.insert(knobs[9]);
@@ -94,21 +83,11 @@ fn compute_part2(moves: &Vec<Move>) -> HashSet<Position> {
             Move::Down => knobs[0].y -= 1,
         }
         for i in 1..=9 {
-            if knobs[i - 1].x == knobs[i].x + 2 {
-                knobs[i].x += 1;
-                knobs[i].y = knobs[i - 1].y;
-            }
-            if knobs[i - 1].x == knobs[i].x - 2 {
-                knobs[i].x -= 1;
-                knobs[i].y = knobs[i - 1].y;
-            }
-            if knobs[i - 1].y == knobs[i].y + 2 {
-                knobs[i].x = knobs[i - 1].x;
-                knobs[i].y += 1;
-            }
-            if knobs[i - 1].y == knobs[i].y - 2 {
-                knobs[i].x = knobs[i - 1].x;
-                knobs[i].y -= 1;
+            let diff_x = knobs[i - 1].x - knobs[i].x;
+            let diff_y = knobs[i - 1].y - knobs[i].y;
+            if diff_x.abs() == 2 || diff_y.abs() == 2 {
+                knobs[i].x += diff_x.signum();
+                knobs[i].y += diff_y.signum();
             }
         }
         tail_pos_set.insert(knobs[9]);
@@ -131,11 +110,11 @@ fn main() {
         .collect();
     // println!("{:#?}", moves);
 
-    let tail_pos_set = compute_part1(&moves);
-    // positions_printer(&tail_pos_set);
+    let tail_pos_set = do_part1(&moves);
+    // print_positions(&tail_pos_set);
     println!("{}", tail_pos_set.len());
 
-    let tail_pos_set = compute_part2(&moves);
-    // positions_printer(&tail_pos_set);
+    let tail_pos_set = do_part2(&moves);
+    // print_positions(&tail_pos_set);
     println!("{}", tail_pos_set.len());
 }
