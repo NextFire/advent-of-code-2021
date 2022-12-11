@@ -1,12 +1,12 @@
 use std::collections::VecDeque;
 
 struct Monkey {
-    items: VecDeque<u32>,
-    op: Box<dyn Fn(u32) -> u32>,
-    divider: u32,
+    items: VecDeque<u64>,
+    op: Box<dyn Fn(u64) -> u64>,
+    divider: u64,
     if_true: usize,
     if_false: usize,
-    nb_inspect: u32,
+    nb_inspect: u64,
 }
 
 impl Monkey {
@@ -15,7 +15,8 @@ impl Monkey {
             while let Some(old) = monkeys[i].items.pop_front() {
                 monkeys[i].nb_inspect += 1;
                 let mut new = (monkeys[i].op)(old);
-                new /= 3;
+                // new /= 3;
+                new %= 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19;
                 let receiver = if (new % monkeys[i].divider) == 0 {
                     monkeys[i].if_true
                 } else {
@@ -96,7 +97,8 @@ fn main() {
         monkey_0, monkey_1, monkey_2, monkey_3, monkey_4, monkey_5, monkey_6, monkey_7,
     ];
 
-    for _ in 0..20 {
+    // for _ in 0..20 {
+    for _ in 0..10_000 {
         Monkey::do_round(&mut monkeys);
     }
     println!("{}", {
