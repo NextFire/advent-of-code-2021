@@ -79,4 +79,26 @@ fn main() {
     let start_pos = heightmap.find('S').unwrap();
     let disjkstra = do_dijkstra(&heightmap, start_pos.0, start_pos.1);
     println!("{:?}", disjkstra.get(end_pos.0, end_pos.1).unwrap());
+
+    // Part 2
+    let dists = heightmap
+        .rows
+        .iter()
+        .enumerate()
+        .flat_map(|(i, l)| {
+            l.iter()
+                .enumerate()
+                .map(|(j, c)| {
+                    // println!("{}, {}", i, j);
+                    if *c == 'a' {
+                        let disjkstra = do_dijkstra(&heightmap, i, j);
+                        *disjkstra.get(end_pos.0, end_pos.1).unwrap()
+                    } else {
+                        None
+                    }
+                })
+                .collect::<Vec<_>>()
+        })
+        .filter_map(|x| x);
+    println!("{:?}", dists.min());
 }
